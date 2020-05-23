@@ -1,6 +1,6 @@
 # borg
 
-<img src="https://raw.githubusercontent.com/hotio/docker-borg/master/img/borg.png" alt="Logo" width="300">
+<img src="https://raw.githubusercontent.com/hotio/docker-borg/master/img/borg.png" alt="Logo" height="130">
 
 [![GitHub](https://img.shields.io/badge/source-github-lightgrey)](https://github.com/hotio/docker-borg)
 [![Docker Pulls](https://img.shields.io/docker/pulls/hotio/borg)](https://hub.docker.com/r/hotio/borg)
