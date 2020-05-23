@@ -25,7 +25,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - BORG_VERSION_AMD64=${BORG_VERSION_AMD64=1.1.11}
+      - BORG_VERSION=${BORG_VERSION=1.1.11}
 
 ---
 kind: pipeline
@@ -81,7 +81,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - BORG_VERSION_ARM64=${BORG_VERSION_ARM64=1.1.11}
+      - BORG_VERSION=${BORG_VERSION=1.1.11}
 
 ---
 kind: pipeline
@@ -137,7 +137,7 @@ steps:
     tags:
       - ${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
     build_args:
-      - BORG_VERSION_ARM=${BORG_VERSION_ARM=1.1.11}
+      - BORG_VERSION=${BORG_VERSION=1.1.11}
 
 ---
 kind: pipeline
@@ -229,7 +229,7 @@ steps:
       - linux/arm
       - linux/arm64
 
-- name: branch-amd64-version
+- name: branch-version
   image: plugins/manifest
   pull: always
   settings:
@@ -238,38 +238,12 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-amd64-${BORG_VERSION_AMD64=1.1.11}
+    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${BORG_VERSION=1.1.11}
     template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
     platforms:
       - linux/amd64
-
-- name: branch-arm64-version
-  image: plugins/manifest
-  pull: always
-  settings:
-    ignore_missing: false
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-arm64-${BORG_VERSION_ARM64=1.1.11}
-    template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
-    platforms:
-      - linux/arm64
-
-- name: branch-arm-version
-  image: plugins/manifest
-  pull: always
-  settings:
-    ignore_missing: false
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-arm-${BORG_VERSION_ARM64=1.1.11}
-    template: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-OS-ARCH
-    platforms:
       - linux/arm
+      - linux/arm64
 
 depends_on:
   - linux-amd64-test
@@ -296,6 +270,7 @@ steps:
       from_secret: discord_id
     DISCORD_TOKEN:
       from_secret: discord_token
+    VERSION_FIELD: ${BORG_VERSION=1.1.11}
   commands:
     - curl -fsSL https://gist.githubusercontent.com/hotio/d490b6447ddde9634475ddacbc85d8c1/raw/discord-build-notify.sh > discord-build-notify.sh
     - bash discord-build-notify.sh

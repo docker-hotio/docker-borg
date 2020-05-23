@@ -5,7 +5,15 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 ENTRYPOINT ["/usr/local/bin/borg"]
 
-ARG BORG_VERSION_ARM
+ARG BORG_VERSION
 
-ADD https://dl.bintray.com/borg-binary-builder/borg-binaries/borg-${BORG_VERSION_ARM}-armv6 /usr/local/bin/borg
-RUN chmod 755 /usr/local/bin/borg
+# install
+RUN apt update && \
+    apt install -y --no-install-recommends --no-install-suggests \
+        python3-pip && \
+    pip3 install --no-cache-dir --upgrade borgbackup==${BORG_VERSION} && \
+# clean up
+    apt purge -y python3-pip && \
+    apt autoremove -y && \
+    apt clean && \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
