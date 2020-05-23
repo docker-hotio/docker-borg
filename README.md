@@ -10,10 +10,7 @@
 Just the basics to get the container running:
 
 ```shell
-docker run --rm --name borg \
-    --hostname <your_hostname> \
-    -v /<host_folder_config>:/config \
-    hotio/borg ...
+docker run --rm hotio/borg ...
 ```
 
 ## Tags
