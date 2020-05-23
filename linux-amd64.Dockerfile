@@ -7,4 +7,5 @@ ENTRYPOINT ["/usr/local/bin/borg"]
 
 ARG BORG_VERSION_AMD64
 
-RUN wget https://github.com/borgbackup/borg/releases/download/${BORG_VERSION_AMD64}/borg-linux64 -O /usr/local/bin/borg && chmod 755 /usr/local/bin/borg
+ADD https://github.com/borgbackup/borg/releases/download/${BORG_VERSION_AMD64}/borg-linux64 /usr/local/bin/borg
+RUN chmod 755 /usr/local/bin/borg

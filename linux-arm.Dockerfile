@@ -7,4 +7,5 @@ ENTRYPOINT ["/usr/local/bin/borg"]
 
 ARG BORG_VERSION_ARM
 
-RUN wget https://dl.bintray.com/borg-binary-builder/borg-binaries/borg-${BORG_VERSION_ARM}-armv6 -O /usr/local/bin/borg && chmod 755 /usr/local/bin/borg
+ADD https://dl.bintray.com/borg-binary-builder/borg-binaries/borg-${BORG_VERSION_ARM}-armv6 /usr/local/bin/borg
+RUN chmod 755 /usr/local/bin/borg
