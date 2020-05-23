@@ -50,6 +50,16 @@ steps:
   pull: always
   commands:
     - borg --version
+- name: create-backup
+  image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+  pull: always
+  environment:
+    BORG_PASSPHRASE: testpassphrase
+  commands:
+    - mkdir /tmp/borgtest
+    - borg init --encryption=repokey-blake2 /tmp/borgtest
+    - borg create --verbose --filter AME --list --stats --show-rc --compression lz4 --exclude-caches /tmp/borgtest::'{hostname}-{now}' "/var/log/"
+    - borg prune --list --prefix '{hostname}-' --show-rc --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /tmp/borgtest
 
 depends_on:
   - linux-amd64
@@ -106,6 +116,16 @@ steps:
   pull: always
   commands:
     - borg --version
+- name: create-backup
+  image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+  pull: always
+  environment:
+    BORG_PASSPHRASE: testpassphrase
+  commands:
+    - mkdir /tmp/borgtest
+    - borg init --encryption=repokey-blake2 /tmp/borgtest
+    - borg create --verbose --filter AME --list --stats --show-rc --compression lz4 --exclude-caches /tmp/borgtest::'{hostname}-{now}' "/var/log/"
+    - borg prune --list --prefix '{hostname}-' --show-rc --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /tmp/borgtest
 
 depends_on:
   - linux-arm64
@@ -162,6 +182,16 @@ steps:
   pull: always
   commands:
     - borg --version
+- name: create-backup
+  image: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME##docker-}:${DRONE_COMMIT_BRANCH}-${DRONE_COMMIT_SHA:0:7}-${DRONE_BUILD_NUMBER}-${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}
+  pull: always
+  environment:
+    BORG_PASSPHRASE: testpassphrase
+  commands:
+    - mkdir /tmp/borgtest
+    - borg init --encryption=repokey-blake2 /tmp/borgtest
+    - borg create --verbose --filter AME --list --stats --show-rc --compression lz4 --exclude-caches /tmp/borgtest::'{hostname}-{now}' "/var/log/"
+    - borg prune --list --prefix '{hostname}-' --show-rc --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /tmp/borgtest
 
 depends_on:
   - linux-arm
