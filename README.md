@@ -15,6 +15,8 @@ Just the basics to get the container running:
 docker run --rm hotio/borg ...
 ```
 
+The default `ENTRYPOINT` is `borg`.
+
 ## Tags
 
 | Tag      | Description                    | Build Status                                                                                                                                        | Last Updated                                                                                                                                                  |
