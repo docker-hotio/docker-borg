@@ -1,20 +1,10 @@
-FROM ubuntu@sha256:b58746c8a89938b8c9f5b77de3b8cf1fe78210c696ab03a1442e235eea65d84f
+FROM alpine@sha256:39eda93d15866957feaee28f8fc5adb545276a64147445c64992ef69804dbf01
 LABEL maintainer="hotio"
-
-ARG DEBIAN_FRONTEND="noninteractive"
-
 ENTRYPOINT ["borg"]
 
 ARG BORG_VERSION
 
-# install
-RUN apt update && \
-    apt install -y --no-install-recommends --no-install-suggests \
-        fuse python3 python3-pkg-resources libssl1.1 libacl1 \
-        libfuse-dev python3-pip python3-setuptools build-essential python3-all-dev pkg-config python3-pkgconfig libssl-dev libacl1-dev && \
+RUN apk add --no-cache libacl lz4-libs py3-pyzmq py3-setuptools python3 zstd-libs fuse && \
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual=build-dependencies py3-pip py3-pkgconfig python3-dev openssl-dev acl-dev fuse-dev build-base linux-headers && \
     pip3 install --no-cache-dir --upgrade borgbackup[fuse]==${BORG_VERSION} && \
-# clean up
-    apt purge -y libfuse-dev python3-pip python3-setuptools build-essential python3-all-dev pkg-config python3-pkgconfig libssl-dev libacl1-dev && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+    apk del --purge build-dependencies
