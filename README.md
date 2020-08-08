@@ -20,10 +20,10 @@ The default `ENTRYPOINT` is `borg`.
 
 ## Tags
 
-| Tag      | Description                    | Build Status                                                                                        | Last Updated                                                                                         |
-| ---------|--------------------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| latest   | The same as `stable`           |                                                                                                     |                                                                                                      |
-| stable   | Stable version                 | ![build](https://github.com/hotio/docker-borg/workflows/build/badge.svg?branch=stable&event=push)   | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/stable)   |
-| unstable | Unstable Pre-releases          | ![build](https://github.com/hotio/docker-borg/workflows/build/badge.svg?branch=unstable&event=push) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/unstable) |
+| Tag      | Description                    |
+| ---------|--------------------------------|
+| latest   | The same as `stable`           |
+| stable   | Stable version                 |
+| unstable | Unstable Pre-releases          |
 
 You can also find tags that reference a commit or version number.
