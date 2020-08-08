@@ -20,10 +20,10 @@ The default `ENTRYPOINT` is `borg`.
 
 ## Tags
 
-| Tag      | Description                    | Build Status                                                                                                                                        | Last Updated                                                                                                                                                  |
-| ---------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| latest   | The same as `stable`           |                                                                                                                                                     |                                                                                                                                                               |
-| stable   | Stable version                 | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-borg/status.svg?ref=refs/heads/stable)](https://cloud.drone.io/hotio/docker-borg)   | [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/stable)](https://github.com/hotio/docker-borg/commits/stable)     |
-| unstable | Unstable Pre-releases          | [![Build Status](https://cloud.drone.io/api/badges/hotio/docker-borg/status.svg?ref=refs/heads/unstable)](https://cloud.drone.io/hotio/docker-borg) | [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/unstable)](https://github.com/hotio/docker-borg/commits/unstable) |
+| Tag      | Description                    | Build Status                                                                                        | Last Updated                                                                                         |
+| ---------|--------------------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| latest   | The same as `stable`           |                                                                                                     |                                                                                                      |
+| stable   | Stable version                 | ![build](https://github.com/hotio/docker-borg/workflows/build/badge.svg?branch=stable&event=push)   | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/stable)   |
+| unstable | Unstable Pre-releases          | ![build](https://github.com/hotio/docker-borg/workflows/build/badge.svg?branch=unstable&event=push) | ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/hotio/docker-borg/unstable) |
 
 You can also find tags that reference a commit or version number.
