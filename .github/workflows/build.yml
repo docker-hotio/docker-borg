@@ -63,12 +63,7 @@ jobs:
 
       - name: Check if app works
         run: |
-          docker run --rm --entrypoint="" ${GITHUB_REPOSITORY//docker-/}:${GITHUB_REF//refs\/heads\//}-${GITHUB_SHA:0:7}-${GITHUB_RUN_NUMBER}-${{ matrix.architecture }} \
-            borg --version && \
-            export BORG_PASSPHRASE=testpassphrase && mkdir /tmp/borgtest && \
-            borg init --encryption=repokey-blake2 /tmp/borgtest && \
-            borg create --verbose --filter AME --list --stats --show-rc --compression lz4 --exclude-caches /tmp/borgtest::'{hostname}-{now}' "/var/log/" && \
-            borg prune --list --prefix '{hostname}-' --show-rc --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /tmp/borgtest
+          docker run --rm --entrypoint="" ${GITHUB_REPOSITORY//docker-/}:${GITHUB_REF//refs\/heads\//}-${GITHUB_SHA:0:7}-${GITHUB_RUN_NUMBER}-${{ matrix.architecture }} borg --version && export BORG_PASSPHRASE=testpassphrase && mkdir /tmp/borgtest && borg init --encryption=repokey-blake2 /tmp/borgtest && borg create --verbose --filter AME --list --stats --show-rc --compression lz4 --exclude-caches /tmp/borgtest::'{hostname}-{now}' "/var/log/" && borg prune --list --prefix '{hostname}-' --show-rc --keep-daily 7 --keep-weekly 4 --keep-monthly 6 /tmp/borgtest
   
   publish:
     runs-on: ubuntu-20.04
